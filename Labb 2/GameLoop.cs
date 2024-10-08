@@ -16,21 +16,12 @@ namespace Labb_2
             this.player = player;
         }
 
-      /*  List<Enemy> enemies = LevelData.Elements.OfType<Enemy>().ToList;*/
+        /*  List<Enemy> enemies = LevelData.Elements.OfType<Enemy>().ToList;*/
 
 
-        public void RunLoop()
-        {
-            do
+            public void RunLoop() 
             {
-                foreach (LevelElement element in level.Elements)
-                {
-                    element.Draw();
-                }
-
-                player.MovePlayer();
-
-            } while (true);
-        }
+            
+            }
     }
 }

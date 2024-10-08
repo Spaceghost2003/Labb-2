@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,33 +15,27 @@ namespace Labb_2
         public int Health { get; set; }
         public Player(int x, int y) : base(x,y,'@', ConsoleColor.Green)
         {
+            x = X;
+            y = Y;
             Health = 10;
             Name = "Player";
         }
-        public void MovePlayer()
+
+
+        public void DrawPlayer()
         {
-            ConsoleKeyInfo input = Console.ReadKey(true);
-            switch (input.Key) 
-            {
-                case ConsoleKey.LeftArrow: 
-                    X--;
-                    break;
-                case ConsoleKey.RightArrow :
-                    X++;
-                    break;
-                case ConsoleKey.UpArrow:
-                    Y++;
-                    break;
-                case ConsoleKey.DownArrow:
-                    Y--;
-                    break;
-                case ConsoleKey.Escape:
-                    Console.WriteLine("spelet stängs");
-                    break;
-
-
-            }
+            Console.SetCursorPosition(X, Y);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(Icon);
         }
+        public void Move(int moveX, int moveY)
+        {
+                X += moveX;
+                Y += moveY;
 
+        }
+        
+
+       
     }
 }

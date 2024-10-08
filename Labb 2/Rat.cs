@@ -10,6 +10,7 @@ namespace Labb_2
 {
     internal class Rat : Enemy
     {
+        Random rnd = new Random();
         public Rat(int x, int y) :base(x,y,'r',ConsoleColor.Red)
         {
             Health = 10;
@@ -18,6 +19,15 @@ namespace Labb_2
        public override void Update()
         {
             throw new NotImplementedException();
+        }
+
+        public void DrawRat()
+        {
+            X = rnd.Next(1, 4);
+            Y = rnd.Next(1, 4);
+            Console.SetCursorPosition(X, Y);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write(Icon);
         }
     }
 }

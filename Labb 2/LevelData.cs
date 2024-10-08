@@ -29,7 +29,6 @@ namespace Labb_2
 			_elements = new List<LevelElement>();
 				while (!reader.EndOfStream)
 				{
-
                     unit = (char)reader.Read();
 
 					switch (unit) 
@@ -41,7 +40,7 @@ namespace Labb_2
 							_elements.Add(new Rat(xPosition, yPosition));
 							break;
 						case 's':
-							_elements.Add(new Rat(xPosition, yPosition));
+							_elements.Add(new Snake(xPosition, yPosition));
 							break;
 						case '@':
 							_elements.Add(new Player(xPosition, yPosition));
@@ -57,6 +56,19 @@ namespace Labb_2
 			}
 
         }
+		public bool Collision(int x, int y)
+		{
+			foreach (var element in _elements)
+			{
+				if(element.X == x && element.Y == y && element is Wall)
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 
-	}
+
+
+    }
 }

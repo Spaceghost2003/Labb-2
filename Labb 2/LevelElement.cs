@@ -21,15 +21,28 @@ namespace Labb_2
             FColor = fColor;
             
         }
+
+
         public void Draw()
         {
+
+
             Console.SetCursorPosition(X, Y);
             Console.ForegroundColor = FColor;
             Console.WriteLine(Icon);
             Console.ResetColor();
+
             
         }
 
+        public void runGame()
+        {
+       
+
+
+
+
+        }
     }
 }
     
