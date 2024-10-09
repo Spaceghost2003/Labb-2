@@ -33,9 +33,9 @@ internal class GameLoop
             foreach (LevelElement element in level.Elements)
             {
                 element.Update(level.Elements);
-                element.Draw();
+                element.Draw(player);
             }
-            player.Draw();
+            player.Draw(player);
 
             ConsoleKeyInfo input = Console.ReadKey(true);
 

@@ -62,7 +62,21 @@ foreach (LevelElement element in level.Elements)
     }
 }*/
 
+/*
+KLART:
+rörelsemönster
+vision range
+combat
 
+todo:
+Collision för orm
+dice roll
+combat
+Combat result print
+
+
+ 
+ */
 /*gameloop.RunLoop();*/
 
 

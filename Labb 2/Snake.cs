@@ -16,6 +16,18 @@ namespace Labb_2
         }
         public override void Update(List<LevelElement> levelElements)
         {
+            var player = levelElements
+                .Where(e => e.GetType() == typeof(Player))
+                .FirstOrDefault();
+
+            var range = Math.Sqrt((this.X - player.X) * (this.X - player.X) +
+                (this.Y - player.Y) * (this.Y - player.Y)) ;
+
+            if(range <= 2)
+            {
+                Move(Math.Clamp(this.X - player.X, -1, 1),
+                    Math.Clamp(this.Y - player.Y, -1, 1));
+            }
 
 
         }

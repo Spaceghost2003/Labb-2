@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace Labb_2
+﻿namespace Labb_2
 {
     abstract class LevelElement
     {
         public int X { get; set; }
         public int Y { get; set; }
-        
+
+        public bool isSeen = false;
         protected char Icon { get; set; }
         protected ConsoleColor FColor { get; set; }
         public LevelElement(int x, int y, char icon, ConsoleColor fColor)
@@ -22,7 +16,7 @@ namespace Labb_2
             FColor = fColor;
 
         }
-        public bool Collision(int x, int y,List<LevelElement> _elements)
+        public bool Collision(int x, int y, List<LevelElement> _elements)
         {
             foreach (var element in _elements)
             {
@@ -42,15 +36,25 @@ namespace Labb_2
             }
             return false;
         }
-        public void Draw()
+        public void Draw(LevelElement p)
         {
+/*            var range = Math.Sqrt(((X - p.X) * (X - p.X) + (Y - p.Y) * (Y - p.Y)));
+            if(range <= 5 || isSeen == true)
+            {
+                if(this.GetType() == typeof(Wall))
+                {
+                    this.isSeen = true;
+                }
+
+            }*/
+
             Console.SetCursorPosition(X, Y);
             Console.ForegroundColor = FColor;
             Console.WriteLine(Icon);
             Console.ResetColor();
         }
 
-        public virtual void Update(List<LevelElement>leveldata)
+        public virtual void Update(List<LevelElement> leveldata)
         {
 
         }
@@ -64,8 +68,8 @@ namespace Labb_2
             X += moveX;
             Y += moveY;
         }
-  
+
     }
 }
-    
+
 
