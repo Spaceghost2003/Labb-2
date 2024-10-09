@@ -63,7 +63,14 @@ namespace Labb_2
 				if(element.X == x && element.Y == y && element is Wall)
 				{
 					return true;
+				}if (element.X == x && element.Y == y && element is Rat)
+				{
+					return true;
+				}if(element.X == x && element.Y == y && element is Snake)
+				{
+					return true;
 				}
+
 			}
 			return false;
 		}

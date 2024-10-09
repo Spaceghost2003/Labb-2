@@ -1,17 +1,19 @@
 ﻿
 using Labb_2;
 using System.Runtime.CompilerServices;
-LevelData level = new LevelData();
+
+
+/*LevelData level = new LevelData();
 level.Load("Level1.txt");
-
+*/
 Console.CursorVisible = false;
+GameLoop gameloop = new GameLoop();
+
+gameloop.RunLoop();
 
 
-Player player = new Player(5,3);
 
-
-
-while (true)
+/*while (true)
 {
 
     
@@ -58,7 +60,7 @@ foreach (LevelElement element in level.Elements)
                 break;
         }
     }
-}
+}*/
 
 
 /*gameloop.RunLoop();*/

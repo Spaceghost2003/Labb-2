@@ -11,6 +11,8 @@ namespace Labb_2
     internal class Rat : Enemy
     {
         Random rnd = new Random();
+
+
         public Rat(int x, int y) :base(x,y,'r',ConsoleColor.Red)
         {
             Health = 10;
@@ -29,5 +31,7 @@ namespace Labb_2
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(Icon);
         }
+
+
     }
 }
