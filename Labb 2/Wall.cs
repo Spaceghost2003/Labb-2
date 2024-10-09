@@ -12,5 +12,10 @@ namespace Labb_2
         {
 
         }
+        public override void Move(int moveX, int moveY)
+        {
+
+
+        }
     }
 }

@@ -14,9 +14,16 @@ namespace Labb_2
             Health = 25;
             Name = "Snake";
         }
-        public override void Update()
+        public override void Update(List<LevelElement> levelElements)
         {
-            throw new NotImplementedException();
+
+
+        }
+
+        public override void Move(int moveX, int moveY)
+        {
+            X += moveX;
+            Y += moveY;
 
         }
     }

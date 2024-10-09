@@ -8,7 +8,7 @@ level.Load("Level1.txt");
 */
 Console.CursorVisible = false;
 GameLoop gameloop = new GameLoop();
-
+/*gameloop.Load();*/
 gameloop.RunLoop();
 
 

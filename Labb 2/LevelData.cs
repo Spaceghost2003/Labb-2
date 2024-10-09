@@ -56,7 +56,7 @@ namespace Labb_2
 			}
 
         }
-		public bool Collision(int x, int y)
+/*		public bool Collision(int x, int y)
 		{
 			foreach (var element in _elements)
 			{
@@ -73,7 +73,7 @@ namespace Labb_2
 
 			}
 			return false;
-		}
+		}*/
 
 
 

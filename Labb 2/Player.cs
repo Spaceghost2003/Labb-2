@@ -22,13 +22,8 @@ namespace Labb_2
         }
 
 
-        public void DrawPlayer()
-        {
-            Console.SetCursorPosition(X, Y);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(Icon);
-        }
-        public void Move(int moveX, int moveY)
+
+        public override void Move(int moveX, int moveY)
         {
                 X += moveX;
                 Y += moveY;

@@ -18,20 +18,14 @@ namespace Labb_2
             Health = 10;
             Name = "Rat";
         }
-       public override void Update()
+
+
+
+
+        public override void Move(int moveX, int moveY)
         {
-            throw new NotImplementedException();
+            X += moveX;
+            Y += moveY;
         }
-
-        public void DrawRat()
-        {
-            X = rnd.Next(1, 4);
-            Y = rnd.Next(1, 4);
-            Console.SetCursorPosition(X, Y);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(Icon);
-        }
-
-
     }
 }
