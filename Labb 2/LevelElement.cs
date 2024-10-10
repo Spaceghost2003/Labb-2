@@ -14,6 +14,7 @@
         protected char Icon { get; set; }
         protected ConsoleColor FColor { get; set; }
 
+        private List<string> messages = new();
         public LevelElement(int x, int y, char icon, ConsoleColor fColor)
         {
             X = x;
@@ -43,22 +44,29 @@
         }
         public void Draw(LevelElement p)
         {
-/*            var range = Math.Sqrt(((X - p.X) * (X - p.X) + (Y - p.Y) * (Y - p.Y)));
-            if(range <= 5 || isSeen == true)
+            var range = Math.Sqrt(((X - p.X) * (X - p.X) + (Y - p.Y) * (Y - p.Y)));
+            if (range <= 5 || isSeen == true)
             {
-                if(this.GetType() == typeof(Wall))
-                {
-                    this.isSeen = true;
-                }
-
-            }*/
-
             Console.SetCursorPosition(X, Y);
             Console.ForegroundColor = FColor;
             Console.WriteLine(Icon);
             Console.ResetColor();
+                if (this.GetType() == typeof(Wall))
+                {
+                    this.isSeen = true;
+                }
+            }
+
+        }
+        public List<string> GetMessages()
+        {
+            return messages;
         }
 
+        public void ResetMessages()
+        {
+            messages.Clear();
+        }
         public virtual void Update(List<LevelElement> leveldata)
         {
 
@@ -85,13 +93,14 @@
 
                     yEnemy.Health = yEnemy.Health - myAttack;
                     this.Health =this.Health - enemyAttack;
-                    Console.SetCursorPosition(1, 20);
-
+                    
+                    messages.Add($"You Attack {yEnemy.GetType().Name} for {myAttack} damage");
+                    messages.Add($"{yEnemy.GetType().Name} attacks you for {enemyAttack} damage");
                     if (yEnemy.Health <= 0)
                     {
                         levelelements.Remove(yEnemy);
-                        Console.SetCursorPosition(1, 20);
-                        Console.WriteLine($"{yEnemy.Name}");
+                        
+                        messages.Add($"The {yEnemy.GetType().Name} dies");
                     }
                 }
 
