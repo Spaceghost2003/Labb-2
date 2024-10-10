@@ -16,36 +16,29 @@ namespace Labb_2
         public Random rnd = new Random();
         public string Name { get; set; }
         public int Health { get; set; }
-        public Dice AttackDice { get; set; }
-        public Dice DefendDice { get; set; }
+
         public override void Update(List<LevelElement> levelelements)
         {
-            switch (rnd.Next(0,4))
+            switch (rnd.Next(0,15))
             {
                 case 0:
-                    if(!base.Collision(this.X-1,this.Y,levelelements))
-                        base.Move(-1,0);
+                        base.Move(-1,0,levelelements);
                     break;
                 case 1:
-                    if (!base.Collision(this.X+1 , this.Y, levelelements))
-                        base.Move(1, 0);
+                        base.Move(1, 0,levelelements);
                     break;
                 case 2:
-                    if(!base.Collision(this.X, this.Y-1, levelelements))
-                        base.Move(0, -1);
+                        base.Move(0, -1,levelelements);
                     break;
                 case 3:
-                    if (!base.Collision(this.X, this.Y+1, levelelements))
-                        base.Move(0, 1);
+                        base.Move(0, 1,levelelements);
                     break;
                 default:
                     break;
             }
-
         }
 
 
-        
-        
+
     }
 }

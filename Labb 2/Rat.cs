@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,22 +11,17 @@ namespace Labb_2
 {
     internal class Rat : Enemy
     {
-        Random rnd = new Random();
 
+
+
+ 
 
         public Rat(int x, int y) :base(x,y,'r',ConsoleColor.Red)
         {
             Health = 10;
             Name = "Rat";
-        }
-
-
-
-
-        public override void Move(int moveX, int moveY)
-        {
-            X += moveX;
-            Y += moveY;
+            base.AttackDice = new Dice(1, 6, 3);
+            base.DefendDice = new Dice(1, 6, 1);
         }
     }
 }

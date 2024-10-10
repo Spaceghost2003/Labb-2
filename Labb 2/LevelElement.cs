@@ -2,19 +2,24 @@
 {
     abstract class LevelElement
     {
+        //These are coordinates
         public int X { get; set; }
         public int Y { get; set; }
+        public Dice AttackDice { get; set; }
+        public Dice DefendDice { get; set; }
+
+        public int Health { get; set; }
 
         public bool isSeen = false;
         protected char Icon { get; set; }
         protected ConsoleColor FColor { get; set; }
+
         public LevelElement(int x, int y, char icon, ConsoleColor fColor)
         {
             X = x;
             Y = y;
             Icon = icon;
             FColor = fColor;
-
         }
         public bool Collision(int x, int y, List<LevelElement> _elements)
         {
@@ -58,17 +63,40 @@
         {
 
         }
-        public void runGame()
+        public virtual void Move(int moveX, int moveY, List<LevelElement> levelelements)
         {
+            if (!Collision(this.X + moveX, this.Y + moveY, levelelements))
+            {
+                X += moveX;
+                Y += moveY;
+            }
+            else
+            {
+                var xEnemy = levelelements.Where(e => e.X == this.X + moveX).ToList();
+                var yEnemy = xEnemy.Where(e => e.Y == this.Y + moveY).FirstOrDefault();
+                if (this.GetType() == typeof(Player))
+                {
+                    if(yEnemy.GetType() == typeof(Wall))
+                    {
+                        return;
+                    }
+                    int myAttack = Math.Clamp(this.AttackDice.ThrowDice() - yEnemy.DefendDice.ThrowDice(),0,1000);
+                    int enemyAttack = Math.Clamp(yEnemy.AttackDice.ThrowDice() - this.DefendDice.ThrowDice(),0,1000);
 
+                    yEnemy.Health = yEnemy.Health - myAttack;
+                    this.Health =this.Health - enemyAttack;
+                    Console.SetCursorPosition(1, 20);
+
+                    if (yEnemy.Health <= 0)
+                    {
+                        levelelements.Remove(yEnemy);
+                        Console.SetCursorPosition(1, 20);
+                        Console.WriteLine($"{yEnemy.Name}");
+                    }
+                }
+
+            }
         }
-
-        public virtual void Move(int moveX, int moveY)
-        {
-            X += moveX;
-            Y += moveY;
-        }
-
     }
 }
 

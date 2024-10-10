@@ -32,6 +32,7 @@ internal class GameLoop
             Console.Clear();
             foreach (LevelElement element in level.Elements)
             {
+                
                 element.Update(level.Elements);
                 element.Draw(player);
             }
@@ -42,28 +43,16 @@ internal class GameLoop
             switch (input.Key)
             {
                 case ConsoleKey.LeftArrow:
-                    if (!player.Collision(player.X - 1, player.Y,level.Elements))
-                    {
-                        player.Move(-1, 0);
-                    }
+                        player.Move(-1, 0,level.Elements);
                     break;
                 case ConsoleKey.RightArrow:
-                    if (!player.Collision(player.X + 1, player.Y,level.Elements))
-                    {
-                        player.Move(1, 0);
-                    }
+                        player.Move(1, 0,level.Elements);
                     break;
                 case ConsoleKey.UpArrow:
-                    if (!player.Collision(player.X, player.Y - 1,level.Elements))
-                    {
-                        player.Move(0, -1);
-                    }
+                        player.Move(0, -1,level.Elements);
                     break;
                 case ConsoleKey.DownArrow:
-                    if (!player.Collision(player.X, player.Y + 1,level.Elements))
-                    {
-                        player.Move(0, 1);
-                    }
+                        player.Move(0, 1,level.Elements);
                     break;
             }
         }

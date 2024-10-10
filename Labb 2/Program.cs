@@ -67,9 +67,10 @@ KLART:
 rörelsemönster
 vision range
 combat
+Collision för orm
 
 todo:
-Collision för orm
+
 dice roll
 combat
 Combat result print

@@ -9,26 +9,20 @@ namespace Labb_2
 {
     internal class Player: LevelElement
     {
-        public Dice AttackDice { get; set; }
-        public Dice DefendDice { get; set; }
         public string Name { get; set; }
-        public int Health { get; set; }
+/*        public int Health { get; set; }*/
         public Player(int x, int y) : base(x,y,'@', ConsoleColor.Green)
         {
             x = X;
             y = Y;
-            Health = 10;
+            Health = 100;
             Name = "Player";
+            base.AttackDice = new Dice(2,6,2);
+            base.DefendDice = new Dice(2,6,0);
         }
 
 
 
-        public override void Move(int moveX, int moveY)
-        {
-                X += moveX;
-                Y += moveY;
-
-        }
         
 
        

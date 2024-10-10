@@ -8,14 +8,13 @@ namespace Labb_2
 {
      internal class Wall:LevelElement
     {
+        
         public Wall(int x, int y) : base(x, y, '#', ConsoleColor.Gray)
         {
-
+            base.Health = 10000;
+            base.AttackDice = new Dice(0,0,0);
+            base.DefendDice = new Dice(0,0,0);
         }
-        public override void Move(int moveX, int moveY)
-        {
 
-
-        }
     }
 }

@@ -13,6 +13,8 @@ namespace Labb_2
         {
             Health = 25;
             Name = "Snake";
+            base.AttackDice = new Dice(3,4,2);
+            base.DefendDice = new Dice(1,8,5);
         }
         public override void Update(List<LevelElement> levelElements)
         {
@@ -26,17 +28,8 @@ namespace Labb_2
             if(range <= 2)
             {
                 Move(Math.Clamp(this.X - player.X, -1, 1),
-                    Math.Clamp(this.Y - player.Y, -1, 1));
+                    Math.Clamp(this.Y - player.Y, -1, 1),levelElements);
             }
-
-
-        }
-
-        public override void Move(int moveX, int moveY)
-        {
-            X += moveX;
-            Y += moveY;
-
         }
     }
 }
