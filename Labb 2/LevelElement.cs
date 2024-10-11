@@ -103,7 +103,6 @@
                         messages.Add($"The {yEnemy.GetType().Name} dies");
                     }
                 }
-
             }
         }
     }

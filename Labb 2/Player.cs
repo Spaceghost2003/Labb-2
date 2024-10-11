@@ -20,11 +20,5 @@ namespace Labb_2
             base.AttackDice = new Dice(2,6,2);
             base.DefendDice = new Dice(2,6,0);
         }
-
-
-
-        
-
-       
     }
 }

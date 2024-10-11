@@ -18,8 +18,8 @@ namespace Labb_2
 
         public Rat(int x, int y) :base(x,y,'r',ConsoleColor.Red)
         {
-            Health = 10;
-            Name = "Rat";
+            base.Health = 10;
+            base.Name = "Rat";
             base.AttackDice = new Dice(1, 6, 3);
             base.DefendDice = new Dice(1, 6, 1);
         }

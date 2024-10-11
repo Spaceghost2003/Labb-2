@@ -11,8 +11,8 @@ namespace Labb_2
 
         public Snake(int x, int y) : base(x,y,'s',ConsoleColor.Green)
         {
-            Health = 25;
-            Name = "Snake";
+            base.Health = 10;
+            base.Name = "Snake";
             base.AttackDice = new Dice(3,4,2);
             base.DefendDice = new Dice(1,8,5);
         }

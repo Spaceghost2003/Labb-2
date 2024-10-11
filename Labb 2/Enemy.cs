@@ -15,7 +15,7 @@ namespace Labb_2
         }
         public Random rnd = new Random();
         public string Name { get; set; }
-        public int Health { get; set; }
+
 
         public override void Update(List<LevelElement> levelelements)
         {

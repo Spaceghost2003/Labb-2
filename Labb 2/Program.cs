@@ -1,5 +1,6 @@
 ﻿
 using Labb_2;
+using System.Media;
 using System.Runtime.CompilerServices;
 
 
@@ -61,24 +62,6 @@ foreach (LevelElement element in level.Elements)
         }
     }
 }*/
-
-/*
-KLART:
-rörelsemönster
-vision range
-combat
-Collision för orm
-
-todo:
-
-dice roll
-combat
-Combat result print
-
-
- 
- */
-/*gameloop.RunLoop();*/
 
 
 /*    foreach (LevelElement element in level.Elements)

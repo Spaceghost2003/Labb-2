@@ -26,7 +26,6 @@ namespace Labb_2
             {
                 total += rnd.Next(1, _sides + 1);
             }
-
             return total + _modifier;
         }
 
