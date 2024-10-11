@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,8 +24,10 @@ internal class GameLoop
     }
     public void RunLoop()
     {
-
+        PlayIntro();
         splash();
+        Console.ReadKey();
+        soundtrack();
         var player = level.Elements
             .Where(p => p.GetType() == typeof(Player))
             .FirstOrDefault();
@@ -73,13 +76,16 @@ internal class GameLoop
 
             if (player.Health <= 0)
             {
+                PlayIntro();
                 DeathScreen();
+                Console.ReadKey();
                 break;
             }
         } while (true);
     }
 
-    public void splash()
+//Fun things
+public void splash()
     {
         Console.ForegroundColor = ConsoleColor.Red;           
         Console.WriteLine(@" 
@@ -130,9 +136,20 @@ public void DeathScreen()
                   ");
         Console.WriteLine("____________________________________________________________________________________________________________");
 
-        Thread.Sleep(5000);
+        Thread.Sleep(100000);
 
+    }
 
+static void PlayIntro()
+{
+    SoundPlayer mainMenusond = new SoundPlayer("mainmenu.wav");
+    mainMenusond.PlayLooping();
+}
+
+static void soundtrack()
+    {
+        SoundPlayer soundtrack = new SoundPlayer("soundtrack song.wav");
+        soundtrack.PlayLooping();
     }
 }
 

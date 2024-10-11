@@ -4,15 +4,17 @@ using System.Media;
 using System.Runtime.CompilerServices;
 
 
-/*LevelData level = new LevelData();
-level.Load("Level1.txt");
-*/
+
 Console.CursorVisible = false;
 GameLoop gameloop = new GameLoop();
-/*gameloop.Load();*/
+
 gameloop.RunLoop();
 
-
+static void PlayIntro()
+{
+    SoundPlayer mainMenusond = new SoundPlayer("mainmenu.wav");
+    mainMenusond.PlaySync();
+}
 
 /*while (true)
 {

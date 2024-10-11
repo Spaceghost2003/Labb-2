@@ -56,26 +56,5 @@ namespace Labb_2
 			}
 
         }
-/*		public bool Collision(int x, int y)
-		{
-			foreach (var element in _elements)
-			{
-				if(element.X == x && element.Y == y && element is Wall)
-				{
-					return true;
-				}if (element.X == x && element.Y == y && element is Rat)
-				{
-					return true;
-				}if(element.X == x && element.Y == y && element is Snake)
-				{
-					return true;
-				}
-
-			}
-			return false;
-		}*/
-
-
-
     }
 }
