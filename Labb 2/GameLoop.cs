@@ -12,12 +12,14 @@ namespace Labb_2;
 internal class GameLoop 
 {
     public DungeonDataAccess db = new DungeonDataAccess();
-    private Player player;
+    public Player player;
     public LevelData level = new LevelData();
-
+    bool startNewGame = true;
     public GameLoop()
     {
-        Load();
+        //splash();
+        //Load();
+        ShowMainMenu();
     }
     public void Load()
     {
@@ -27,13 +29,12 @@ internal class GameLoop
  
     public async void RunLoop()
     {
-        PlayIntro();
-        splash();
+        
         Console.ReadKey();
-        soundtrack();
-        var player = level.Elements
+            var player = level.Elements
             .Where(p => p.GetType() == typeof(Player))
             .FirstOrDefault();
+        
         List<string> messages = new();
         do
         {
@@ -91,21 +92,14 @@ internal class GameLoop
 
             if (player.Health <= 0)
             {
-                PlayIntro();
+                
                 DeathScreen();
                 Console.ReadKey();
                 break;
             }
         } while (true);
     }
- /*public void MakeSave(List<LevelElement> levelElement)
-    {
-        db.ClearSave();
-        foreach (var element in levelElement)
-        {
-            db.CreateSave(element);
-        }
-    }*/
+
 
     public void SaveGame()
     {
@@ -117,14 +111,12 @@ internal class GameLoop
 //Fun things
 public void splash()
     {
-        Console.ForegroundColor = ConsoleColor.Red;           
-        Console.WriteLine(@" 
 
+        string newGame = @" 
 
+        
 
-                                  *              *        *         *
-                    *         *                   *                   *                * 
-           *              *              *              *                   *               *        *
+          
                   
          ██▄ *   ▄      ▄     ▄▀  ▄███▄   ████▄    ▄       ▄█▄    █▄▄▄▄ ██     ▄ ▄   █     ▄███▄   █▄▄▄▄ 
          █  █  *  █      █  ▄▀    █▀   ▀  █   █     █      █▀ ▀▄  █  ▄▀ █ █   █   █  █     █▀   ▀  █  ▄▀ 
@@ -133,20 +125,124 @@ public void splash()
          ███▀  █▄ ▄█ █  █ █  ███  ▀███▀         █  █ █     ▀███▀    █      █  █ █ █      ▀ ▀███▀     █   
          ▀▀▀         █   ██                     █   ██             ▀      █    ▀ ▀                  ▀    
                                                                   ▀                               
-                                           PRESS ANY KEY TO BEGIN
-                                         *                  *        *         *
-                    *         *                     *                   *                * 
-         *              *              *                 *                   *               *        *
-              
+                            
+            
+         Controls: press P to save, press L to load
+        ";
+        bool startgame=false;
+        string oldGame=
+        @" 
 
-                                         *                  *        *         *
-                    *         *                     *                   *                * 
-         *              *              *                 *                   *               *        *
+        
 
- ");
+          
+                  
+         ██▄ *   ▄      ▄     ▄▀  ▄███▄   ████▄    ▄       ▄█▄    █▄▄▄▄ ██     ▄ ▄   █     ▄███▄   █▄▄▄▄ 
+         █  █  *  █      █  ▄▀    █▀   ▀  █   █     █      █▀ ▀▄  █  ▄▀ █ █   █   █  █     █▀   ▀  █  ▄▀ 
+         █   █ █   █ ██   █ █ ▀▄  ██▄▄    █   █ ██   █     █   ▀  █▀▀▌  █▄▄█ █ ▄   █ █     ██▄▄    █▀▀▌  
+         █  █  █   █ █ █  █ █   █ █▄   ▄▀ ▀████ █ █  █     █▄  ▄▀ █  █  █  █ █  █  █ ███▄  █▄   ▄▀ █  █  
+         ███▀  █▄ ▄█ █  █ █  ███  ▀███▀         █  █ █     ▀███▀    █      █  █ █ █      ▀ ▀███▀     █   
+         ▀▀▀         █   ██                     █   ██             ▀      █    ▀ ▀                  ▀    
+                                                                  ▀                               
+                                                     NEW GAME  
+                                                    >CONTINUE
+ 
+
+        ";
+        int[] ints;
+
+        Console.ForegroundColor = ConsoleColor.Red;
+        ConsoleKeyInfo input = Console.ReadKey(true);
+        
+        
+        startNewGame = true;
+        do
+        {
+            switch (input.Key)
+            {
+                case (ConsoleKey.UpArrow):
+                    Console.WriteLine(newGame);
+                    startNewGame = true;
+                    if (input.Key == ConsoleKey.Enter)
+                    {
+                        level.Load("Level1.txt");
+                        startgame = true;
+                    }
+                    break;
+                case (ConsoleKey.DownArrow):
+                    Console.WriteLine(oldGame);
+                    if (input.Key == ConsoleKey.Enter)
+                    {
+                        level.Elements = db.LoadSave();
+                        startgame = false;
+                    }
+                    break;
+            }
+        } while (startgame == false);
         Console.ResetColor();
     }
-public void DeathScreen()
+
+
+    public void ShowMainMenu()
+    {
+        string[] menuOptions = { "New Game", "Continue" };
+        int selectedOption = 0;
+
+        while (true)
+        {
+            Console.Clear();
+
+            // Display menu options with the > symbol for the selected one
+            for (int i = 0; i < menuOptions.Length; i++)
+            {
+                if (i == selectedOption)
+                {
+                    
+                    Console.WriteLine($"         ██▄ *   ▄      ▄     ▄▀  ▄███▄   ████▄    ▄       ▄█▄    █▄▄▄▄ ██     ▄ ▄   █     ▄███▄   █▄▄▄▄ \r\n         █  █  *  █      █  ▄▀    █▀   ▀  █   █     █      █▀ ▀▄  █  ▄▀ █ █   █   █  █     █▀   ▀  █  ▄▀ \r\n         █   █ █   █ ██   █ █ ▀▄  ██▄▄    █   █ ██   █     █   ▀  █▀▀▌  █▄▄█ █ ▄   █ █     ██▄▄    █▀▀▌  \r\n         █  █  █   █ █ █  █ █   █ █▄   ▄▀ ▀████ █ █  █     █▄  ▄▀ █  █  █  █ █  █  █ ███▄  █▄   ▄▀ █  █  \r\n         ███▀  █▄ ▄█ █  █ █  ███  ▀███▀         █  █ █     ▀███▀    █      █  █ █ █      ▀ ▀███▀     █   \r\n         ▀▀▀         █   ██                     █   ██             ▀      █    ▀ ▀                  ▀   \n " +
+                        $"" +
+                        $"" + 
+                        $"" +
+                        $"" +
+                        $"\n" +
+                        $"\n> {menuOptions[i]}");
+                }
+                else
+                {
+                    Console.WriteLine($"\n \n  {menuOptions[i]}");
+                }
+            }
+
+            // Handle input
+            ConsoleKey key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.UpArrow) // Move up
+            {
+                selectedOption = (selectedOption - 1 + menuOptions.Length) % menuOptions.Length;
+            }
+            else if (key == ConsoleKey.DownArrow) // Move down
+            {
+                selectedOption = (selectedOption + 1) % menuOptions.Length;
+            }
+            else if (key == ConsoleKey.Enter) // Select option
+            {
+                Console.Clear();
+                if (selectedOption == 0)
+                {
+                    level.Load("Level1.txt");
+                    break; // Exit the menu loop
+                }
+                else if (selectedOption == 1)
+                {
+                    Console.WriteLine("Continuing...");
+                    level.Elements = db.LoadSave();
+                    break; // Exit the menu loop
+                }
+            }
+        }
+    }
+
+
+    public void DeathScreen()
 {
         Console.Clear();
         Console.ForegroundColor = ConsoleColor.Red;
@@ -170,15 +266,7 @@ public void DeathScreen()
 
     }
 
-    static void PlayIntro()
-    {
 
-    }
-static void soundtrack()
-    {
-        
-       
-    }
 }
 
 
