@@ -6,22 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 namespace Labb_2
 {
-    internal class LevelData
+    public class LevelData
     {
+		[BsonId]
+		[BsonRepresentation(BsonType.ObjectId)]
+		public string Id { get; set; }
         private List<LevelElement> _elements;
-
-	
-		    public int xPosition=1;
-			public int yPosition=0;
-		    public char unit;
-
-
 		public List<LevelElement> Elements
 		{
 			get { return _elements; }
+			set { _elements = value; }
 		}
+		public int xPosition=1;
+		public int yPosition=0;
+		public char unit;
 		public void Load(string filename) 
 		{
 			using(StreamReader reader = new StreamReader(filename))
@@ -56,5 +58,10 @@ namespace Labb_2
 			}
 
         }
+
+		public void LoadFromSave()
+		{
+
+		}
     }
 }

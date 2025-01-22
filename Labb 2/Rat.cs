@@ -11,11 +11,6 @@ namespace Labb_2
 {
     internal class Rat : Enemy
     {
-
-
-
- 
-
         public Rat(int x, int y) :base(x,y,'r',ConsoleColor.Red)
         {
             base.Health = 10;

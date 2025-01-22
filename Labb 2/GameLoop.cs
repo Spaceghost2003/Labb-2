@@ -1,15 +1,17 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Labb_2;
 
 internal class GameLoop 
 {
-
+    public DungeonDataAccess db = new DungeonDataAccess();
     private Player player;
     public LevelData level = new LevelData();
 
@@ -22,7 +24,8 @@ internal class GameLoop
         level.Load("Level1.txt");
 
     }
-    public void RunLoop()
+ 
+    public async void RunLoop()
     {
         PlayIntro();
         splash();
@@ -51,11 +54,22 @@ internal class GameLoop
                 case ConsoleKey.DownArrow:
                     player.Move(0, 1, level.Elements);
                     break;
+                case ConsoleKey.P:
+                    SaveGame();
+                    break;
+                case ConsoleKey.L:
+                    level.Elements = db.LoadSave();
+                    player = level.Elements
+                    .Where(p => p.GetType() == typeof(Player))
+                    .FirstOrDefault();
+                    break;
+
                 default:
                     break;
             }
-            foreach (var element in level.Elements)
+            foreach (var element in level.Elements.Where(e => e != null))
             {
+
                 messages.AddRange(element.GetMessages());
                 element.ResetMessages();
             }
@@ -64,6 +78,7 @@ internal class GameLoop
             foreach (LevelElement element in level.Elements)
             {
                 element.Update(level.Elements);
+                
                 element.Draw(player);
             }
             Console.SetCursorPosition(1, 20);
@@ -83,6 +98,21 @@ internal class GameLoop
             }
         } while (true);
     }
+ /*public void MakeSave(List<LevelElement> levelElement)
+    {
+        db.ClearSave();
+        foreach (var element in levelElement)
+        {
+            db.CreateSave(element);
+        }
+    }*/
+
+    public void SaveGame()
+    {
+        var dbHelper = new DungeonDataAccess();
+         dbHelper.CreateSave(level.Elements);
+    }
+
 
 //Fun things
 public void splash()
@@ -140,16 +170,14 @@ public void DeathScreen()
 
     }
 
-static void PlayIntro()
-{
-    SoundPlayer mainMenusond = new SoundPlayer("mainmenu.wav");
-    mainMenusond.PlayLooping();
-}
+    static void PlayIntro()
+    {
 
+    }
 static void soundtrack()
     {
-        SoundPlayer soundtrack = new SoundPlayer("soundtrack song.wav");
-        soundtrack.PlayLooping();
+        
+       
     }
 }
 

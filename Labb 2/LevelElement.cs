@@ -1,7 +1,17 @@
-﻿namespace Labb_2
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
+namespace Labb_2
 {
-    abstract class LevelElement
+    [BsonDiscriminator(RootClass = true)]
+    [BsonKnownTypes(typeof(Wall), typeof(Rat), typeof(Snake), typeof(Player))]
+    public abstract class LevelElement
     {
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
+
+        
         //These are coordinates
         public int X { get; set; }
         public int Y { get; set; }
@@ -10,11 +20,12 @@
 
         public int Health { get; set; }
 
-        public bool isSeen = false;
-        protected char Icon { get; set; }
-        protected ConsoleColor FColor { get; set; }
+        public bool isSeen { get; set; } = false;
+        public char Icon { get; set; }
+        public ConsoleColor FColor { get; set; }
 
-        private List<string> messages = new();
+        
+        public List<string> messages = new();
         public LevelElement(int x, int y, char icon, ConsoleColor fColor)
         {
             X = x;

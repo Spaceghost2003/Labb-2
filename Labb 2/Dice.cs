@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Labb_2
 {
-    internal class Dice
+    public class Dice
     {
         private int _sides   { get; set; }
         private int _amount { get; set; }
