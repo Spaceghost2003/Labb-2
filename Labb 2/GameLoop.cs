@@ -192,13 +192,15 @@ public void splash()
         {
             Console.Clear();
 
-            // Display menu options with the > symbol for the selected one
+            
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 if (i == selectedOption)
                 {
+                //Console.WriteLine("  ██▄ *   ▄      ▄     ▄▀  ▄███▄   ████▄    ▄       ▄█▄    █▄▄▄▄ ██     ▄ ▄   █     ▄███▄   █▄▄▄▄ \r\n         █  █  *  █      █  ▄▀    █▀   ▀  █   █     █      █▀ ▀▄  █  ▄▀ █ █   █   █  █     █▀   ▀  █  ▄▀ \r\n         █   █ █   █ ██   █ █ ▀▄  ██▄▄    █   █ ██   █     █   ▀  █▀▀▌  █▄▄█ █ ▄   █ █     ██▄▄    █▀▀▌  \r\n         █  █  █   █ █ █  █ █   █ █▄   ▄▀ ▀████ █ █  █     █▄  ▄▀ █  █  █  █ █  █  █ ███▄  █▄   ▄▀ █  █  \r\n         ███▀  █▄ ▄█ █  █ █  ███  ▀███▀         █  █ █     ▀███▀    █      █  █ █ █      ▀ ▀███▀     █   \r\n         ▀▀▀         █   ██                     █   ██             ▀      █    ▀ ▀                  ▀   \n");
                     
-                    Console.WriteLine($"         ██▄ *   ▄      ▄     ▄▀  ▄███▄   ████▄    ▄       ▄█▄    █▄▄▄▄ ██     ▄ ▄   █     ▄███▄   █▄▄▄▄ \r\n         █  █  *  █      █  ▄▀    █▀   ▀  █   █     █      █▀ ▀▄  █  ▄▀ █ █   █   █  █     █▀   ▀  █  ▄▀ \r\n         █   █ █   █ ██   █ █ ▀▄  ██▄▄    █   █ ██   █     █   ▀  █▀▀▌  █▄▄█ █ ▄   █ █     ██▄▄    █▀▀▌  \r\n         █  █  █   █ █ █  █ █   █ █▄   ▄▀ ▀████ █ █  █     █▄  ▄▀ █  █  █  █ █  █  █ ███▄  █▄   ▄▀ █  █  \r\n         ███▀  █▄ ▄█ █  █ █  ███  ▀███▀         █  █ █     ▀███▀    █      █  █ █ █      ▀ ▀███▀     █   \r\n         ▀▀▀         █   ██                     █   ██             ▀      █    ▀ ▀                  ▀   \n " +
+                    
+                    Console.WriteLine($" " +
                         $"" +
                         $"" + 
                         $"" +
@@ -212,30 +214,31 @@ public void splash()
                 }
             }
 
-            // Handle input
+            
             ConsoleKey key = Console.ReadKey(true).Key;
 
-            if (key == ConsoleKey.UpArrow) // Move up
+            if (key == ConsoleKey.UpArrow) 
             {
                 selectedOption = (selectedOption - 1 + menuOptions.Length) % menuOptions.Length;
             }
-            else if (key == ConsoleKey.DownArrow) // Move down
+            else if (key == ConsoleKey.DownArrow) 
             {
                 selectedOption = (selectedOption + 1) % menuOptions.Length;
             }
-            else if (key == ConsoleKey.Enter) // Select option
+            else if (key == ConsoleKey.Enter) 
             {
                 Console.Clear();
                 if (selectedOption == 0)
                 {
+                    Console.WriteLine("New game...");
                     level.Load("Level1.txt");
-                    break; // Exit the menu loop
+                    break; 
                 }
                 else if (selectedOption == 1)
                 {
                     Console.WriteLine("Continuing...");
                     level.Elements = db.LoadSave();
-                    break; // Exit the menu loop
+                    break;
                 }
             }
         }
